@@ -12,6 +12,11 @@ describe('Vehicle Info endpoint', () => {
     res.send = sinon.stub().returns(res);
   });
 
+  afterEach(() => {
+    res.status.resetHistory();
+    res.send.resetHistory();
+  });
+
   it('Should reformat data on valid vehicle id', async () => {
     const req1234 = { params: { id: 1234 } };
     const req1235 = { params: { id: 1235 } };
