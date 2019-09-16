@@ -96,5 +96,20 @@ module.exports = {
     }
   },
 
-  postEngine: async (req, res) => {}
+  postEngine: async (req, res) => {
+    const { id } = req.params;
+
+    if (req.body.action) {
+      const { action } = req.body;
+      let command;
+
+      if (action === 'START') command = 'START_VEHICLE';
+      else if (action === 'STOP') command = 'STOP_VEHICLE';
+      else res.status(400).send({ reason: 'Bad request, invalid action.' });
+    } else {
+      res.status(400).send({ reason: "Bad request, missing key 'action'." });
+    }
+
+    // if (action)
+  }
 };
