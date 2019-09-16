@@ -62,12 +62,10 @@ module.exports = {
       res.status(200);
 
       const { tankLevel } = parsed.data;
+      const percent =
+        tankLevel.type === 'Number' ? Number(tankLevel.value) : null;
 
-      if (tankLevel.type === 'Number') {
-        const percent = Number(tankLevel.value);
-
-        res.send({ percent });
-      } else res.send({ percent: null });
+      res.send({ percent });
     } else {
       respondOn404(res, parsed);
     }
