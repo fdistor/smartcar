@@ -12,7 +12,7 @@ app.get('/vehicles/:id', router.getVehicleInfo);
 app.get('/vehicles/:id/doors', router.getSecurity);
 app.get('/vehicles/:id/fuel', router.getFuel);
 app.get('/vehicles/:id/battery', router.getBattery);
-app.post('/vehicles:/id/engine', router.startEngine);
+app.post('/vehicles:/id/engine', router.postEngine);
 
 app.listen(port, err => {
   if (err) console.error(err);
