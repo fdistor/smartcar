@@ -27,7 +27,6 @@ module.exports = class GMApi {
 
   badRequest(id) {
     return JSON.stringify({
-      status: '404',
       reason: `Vehicle id: ${id} not found.`
     });
   }
