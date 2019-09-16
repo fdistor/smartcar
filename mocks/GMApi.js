@@ -2,12 +2,39 @@ const fs = require('fs');
 
 module.exports = class GMApi {
   constructor() {
-    this.engineStopped = true;
+    this.isEngineOn = true;
   }
 
   getInfo(fileName, id) {
     return new Promise((resolve, reject) => {
       const path = this.isValidPath(fileName, id);
+
+      if (path) {
+        fs.readFile(path, 'utf8', (err, data) => {
+          if (err) reject(err);
+
+          resolve(data);
+        });
+      } else {
+        resolve(this.badRequest(id));
+      }
+    });
+  }
+
+  postEngine(fileName, id, action) {
+    return new Promise((resolve, reject) => {
+      let target;
+
+      if (
+        (this.isEngineOn && action === 'START_VEHICLE') ||
+        (!this.isEngineOn && action === 'STOP_VEHICLE')
+      ) {
+        target = fileName + 'Fail';
+      } else {
+        target = fileName + 'Success';
+      }
+
+      const path = this.isValidPath(target, id);
 
       if (path) {
         fs.readFile(path, 'utf8', (err, data) => {
