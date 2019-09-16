@@ -12,7 +12,7 @@ module.exports = class GMApi {
           resolve(data);
         });
       } else {
-        resolve(JSON.stringify({ status, reason }));
+        resolve(this.badRequest(id));
       }
     });
   }
