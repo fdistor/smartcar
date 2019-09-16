@@ -105,11 +105,25 @@ module.exports = {
 
       if (action === 'START') command = 'START_VEHICLE';
       else if (action === 'STOP') command = 'STOP_VEHICLE';
-      else res.status(400).send({ reason: 'Bad request, invalid action.' });
+      else
+        return res.status(400).send({ reason: 'Bad request, invalid action.' });
+
+      const result = await gm.postEngine('engine', id, command);
+      const parsed = JSON.parse(result);
+      const { status } = parsed;
+
+      if (status === '200') {
+        const { status } = parsed.actionResult;
+        const reformatted = status === 'EXECUTED' ? 'success' : 'error';
+
+        res.status(200).send({ status: reformatted });
+      } else {
+        const { reason } = parsed;
+
+        res.status(404).send({ reason });
+      }
     } else {
       res.status(400).send({ reason: "Bad request, missing key 'action'." });
     }
-
-    // if (action)
   }
 };
