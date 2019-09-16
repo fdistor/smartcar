@@ -1,6 +1,10 @@
 const fs = require('fs');
 
 module.exports = class GMApi {
+  constructor() {
+    this.engineStopped = true;
+  }
+
   getInfo(fileName, id) {
     return new Promise((resolve, reject) => {
       const path = this.isValidPath(fileName, id);

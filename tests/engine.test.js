@@ -64,7 +64,7 @@ describe('Engine endpoint', () => {
   });
 
   it("Should return status 400 on missing key 'action'", async () => {
-    const req = { body: { action: 'START' }, params: { id: 1234 } };
+    const req = { body: { start: 'START' }, params: { id: 1234 } };
 
     await router.postEngine(req, res);
 
