@@ -61,9 +61,7 @@ module.exports = {
     if (status === '200') {
       res.status(200);
 
-      const {
-        data: { tankLevel }
-      } = parsed;
+      const { tankLevel } = parsed.data;
 
       if (tankLevel.type === 'Number') {
         const percent = Number(tankLevel.value);
