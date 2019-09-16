@@ -1,0 +1,11 @@
+{
+  "service": "getVehicleInfo",
+  "status": "200",
+  "data": {
+    "vin": { "type": "String", "value": "1235AZ91XP" },
+    "color": { "type": "String", "value": "Forest Green" },
+    "fourDoorSedan": { "type": "Boolean", "value": "False" },
+    "twoDoorCoupe": { "type": "Boolean", "value": "True" },
+    "driveTrain": { "type": "String", "value": "electric" }
+  }
+}
