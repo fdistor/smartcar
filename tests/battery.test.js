@@ -28,13 +28,10 @@ describe('Battery endpoint', () => {
       percent: null
     });
 
-    res.status.resetHistory();
-    res.send.resetHistory();
-
     await router.getBattery(req1235, res);
 
-    expect(res.status.getCall(0).args[0]).to.equal(200);
-    expect(res.send.getCall(0).args[0]).to.deep.equal({
+    expect(res.status.getCall(1).args[0]).to.equal(200);
+    expect(res.send.getCall(1).args[0]).to.deep.equal({
       percent: 64.37
     });
   });
