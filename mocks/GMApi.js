@@ -12,9 +12,6 @@ module.exports = class GMApi {
           resolve(data);
         });
       } else {
-        const status = '404';
-        const reason = `Vehicle id: ${id} not found.`;
-
         resolve(JSON.stringify({ status, reason }));
       }
     });
@@ -54,9 +51,9 @@ module.exports = class GMApi {
   }
 
   badRequest(id) {
-    return {
+    return JSON.stringify({
       status: '404',
       reason: `Vehicle id: ${id} not found.`
-    };
+    });
   }
 };
