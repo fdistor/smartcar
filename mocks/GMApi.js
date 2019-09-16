@@ -21,10 +21,11 @@ module.exports = class GMApi {
   }
 
   getSecurity() {
-    fs.readFile(__dirname + '/./data/security.json', 'utf8', (err, data) => {
-      if (err) return new Error(err);
+    return new Promise((resolve, reject) => {
+      const path = this.isValidPath('security', id);
 
-      return data;
+      if (path) {
+      }
     });
   }
 
@@ -50,5 +51,12 @@ module.exports = class GMApi {
     return fs.existsSync(__dirname + `/./data/${fileName}${id}.json`)
       ? path
       : false;
+  }
+
+  badId(id) {
+    return {
+      status: '404',
+      reason: `Vehicle id: ${id} not found.`
+    };
   }
 };
