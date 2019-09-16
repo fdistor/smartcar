@@ -3,16 +3,21 @@ const fs = require('fs');
 module.exports = class GMApi {
   getVehicleInfo(id) {
     return new Promise((resolve, reject) => {
-      fs.readFile(
-        __dirname + '/./data/vehicleInfo.json',
-        'utf8',
-        (err, data) => {
+      const path = __dirname + `/./data/vehicleInfo${id}.json`;
+      const isValidPath = fs.existsSync(path);
+
+      if (isValidPath) {
+        fs.readFile(path, 'utf8', (err, data) => {
           if (err) reject(err);
 
-          const parsed = JSON.parse(data);
           resolve(data);
-        }
-      );
+        });
+      } else {
+        const status = '404';
+        const reason = `Vehicle id: ${id} not found.`;
+
+        resolve(JSON.stringify({ status, reason }));
+      }
     });
   }
 
