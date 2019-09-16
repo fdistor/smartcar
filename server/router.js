@@ -27,6 +27,7 @@ module.exports = {
       });
     } else {
       const { reason } = parsed;
+
       res.status(404).send({ reason });
     }
   },
@@ -48,6 +49,7 @@ module.exports = {
       res.status(200).send(result);
     } else {
       const { reason } = parsed;
+
       res.status(404).send({ reason });
     }
   },
