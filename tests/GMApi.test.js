@@ -24,3 +24,33 @@ describe('GMApi class', () => {
     expect(gm.invalidRequest).to.be.a('function');
   });
 });
+
+describe('GMApi functionality', () => {
+  let gm;
+
+  beforeEach(() => {
+    gm = new GMApi();
+  });
+
+  it('Should return complete file path if valid file', () => {
+    const path = gm.isValidPath('vehicleInfo', 1234);
+
+    expect(path).to.be.a('string');
+  });
+
+  it('Should return false if invalid file', () => {
+    const path = gm.isValidPath('vehicleInfo', 1236);
+
+    expect(path).to.be.false;
+  });
+
+  it('Should return a JSON object', () => {
+    const json = gm.invalidRequest(1236);
+
+    expect(json).to.deep.equal(
+      JSON.stringify({ reason: 'Vehicle id: 1236 not found.', status: '404' })
+    );
+  });
+  it('Should', () => {});
+  it('Should', () => {});
+});
