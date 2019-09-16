@@ -3,10 +3,9 @@ const fs = require('fs');
 module.exports = class GMApi {
   getVehicleInfo(id) {
     return new Promise((resolve, reject) => {
-      const path = __dirname + `/./data/vehicleInfo${id}.json`;
-      const isValidPath = fs.existsSync(path);
+      const path = this.isValidPath('vehicleInfo', id);
 
-      if (isValidPath) {
+      if (path) {
         fs.readFile(path, 'utf8', (err, data) => {
           if (err) reject(err);
 
@@ -43,5 +42,13 @@ module.exports = class GMApi {
 
       return data;
     });
+  }
+
+  isValidPath(fileName, id) {
+    const path = __dirname + `/./data/${fileName}${id}.json`;
+
+    return fs.existsSync(__dirname + `/./data/${fileName}${id}.json`)
+      ? path
+      : false;
   }
 };
