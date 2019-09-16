@@ -53,7 +53,7 @@ module.exports = class GMApi {
       : false;
   }
 
-  badId(id) {
+  badRequest(id) {
     return {
       status: '404',
       reason: `Vehicle id: ${id} not found.`
