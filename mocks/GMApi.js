@@ -1,4 +1,5 @@
 const fs = require('fs');
+const root = require('../root.js');
 
 module.exports = class GMApi {
   constructor() {
@@ -45,9 +46,9 @@ module.exports = class GMApi {
   }
 
   isValidPath(fileName, id) {
-    const path = __dirname + `/./data/${fileName}${id}.json`;
+    const path = root + `/mocks/data/${fileName}${id}.json`;
 
-    return fs.existsSync(__dirname + `/./data/${fileName}${id}.json`)
+    return fs.existsSync(root + `/mocks/data/${fileName}${id}.json`)
       ? path
       : false;
   }
