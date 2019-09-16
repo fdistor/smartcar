@@ -40,7 +40,7 @@ module.exports = class GMApi {
         resolve(data);
       });
     } else {
-      resolve(this.badRequest(id));
+      resolve(this.invalidRequest(id));
     }
   }
 
@@ -52,7 +52,7 @@ module.exports = class GMApi {
       : false;
   }
 
-  badRequest(id) {
+  invalidRequest(id) {
     return JSON.stringify({
       reason: `Vehicle id: ${id} not found.`,
       status: '404'
