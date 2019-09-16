@@ -1,9 +1,9 @@
 const fs = require('fs');
 
 module.exports = class GMApi {
-  getVehicleInfo(id) {
+  getInfo(fileName, id) {
     return new Promise((resolve, reject) => {
-      const path = this.isValidPath('vehicleInfo', id);
+      const path = this.isValidPath(fileName, id);
 
       if (path) {
         fs.readFile(path, 'utf8', (err, data) => {
@@ -14,31 +14,6 @@ module.exports = class GMApi {
       } else {
         resolve(this.badRequest(id));
       }
-    });
-  }
-
-  getSecurity() {
-    return new Promise((resolve, reject) => {
-      const path = this.isValidPath('security', id);
-
-      if (path) {
-      }
-    });
-  }
-
-  getFuel() {
-    fs.readFile(__dirname + '/./data/fuel.json', 'utf8', (err, data) => {
-      if (err) return new Error(err);
-
-      return data;
-    });
-  }
-
-  getEngine() {
-    fs.readFile(__dirname + '/./data/engine.json', 'utf8', (err, data) => {
-      if (err) return new Error(err);
-
-      return data;
     });
   }
 
