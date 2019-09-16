@@ -1,11 +1,15 @@
 const GMApi = require('../mocks/GMApi.js');
 const gm = new GMApi();
 
+const getStatusAndInfo = async (req, fileName) => {
+  const { id } = req.params;
+  const result = await gm.getInfo(fileName, id);
+  return JSON.parse(result);
+};
+
 module.exports = {
   getVehicleInfo: async (req, res) => {
-    const { id } = req.params;
-    const result = await gm.getInfo('vehicleInfo', id);
-    const parsed = JSON.parse(result);
+    const parsed = await getStatusAndInfo(req, 'vehicleInfo');
     const { status } = parsed;
 
     if (status === '200') {
@@ -26,7 +30,25 @@ module.exports = {
     }
   },
 
-  getSecurity: async (req, res) => {},
+  getSecurity: async (req, res) => {
+    const parsed = await getStatusAndInfo(req, 'security');
+    const { status } = parsed;
+
+    if (status === '200') {
+      const { values } = parsed.data.doors;
+      const result = [];
+
+      values.forEach(door => {
+        const location = door.location.value;
+        const locked = door.locked.value === 'True' ? true : false;
+        result.push({ location, locked });
+      });
+
+      res.status(200).send(result);
+    } else {
+      res.status(404).send(parsed);
+    }
+  },
 
   getFuel: async (req, res) => {},
 
