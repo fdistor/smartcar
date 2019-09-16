@@ -7,6 +7,10 @@ const getStatusAndInfo = async (req, fileName) => {
   return JSON.parse(result);
 };
 
+const respondOn404 = (res, { reason }) => {
+  res.status(404).send({ reason });
+};
+
 module.exports = {
   getVehicleInfo: async (req, res) => {
     const parsed = await getStatusAndInfo(req, 'vehicleInfo');
@@ -26,9 +30,7 @@ module.exports = {
         doorCount
       });
     } else {
-      const { reason } = parsed;
-
-      res.status(404).send({ reason });
+      respondOn404(res, parsed);
     }
   },
 
@@ -48,9 +50,7 @@ module.exports = {
 
       res.status(200).send(result);
     } else {
-      const { reason } = parsed;
-
-      res.status(404).send({ reason });
+      respondOn404(res, parsed);
     }
   },
 
@@ -69,9 +69,7 @@ module.exports = {
         res.send({ percent });
       } else res.send({ percent: null });
     } else {
-      const { reason } = parsed;
-
-      res.status(404).send({ reason });
+      respondOn404(res, parsed);
     }
   },
 
@@ -90,9 +88,7 @@ module.exports = {
         res.send({ percent });
       } else res.send({ percent: null });
     } else {
-      const { reason } = parsed;
-
-      res.status(404).send({ reason });
+      respondOn404(res, parsed);
     }
   },
 
@@ -118,9 +114,7 @@ module.exports = {
 
         res.status(200).send({ status: reformatted });
       } else {
-        const { reason } = parsed;
-
-        res.status(404).send({ reason });
+        respondOn404(res, parsed);
       }
     } else {
       res.status(400).send({ reason: "Bad request, missing key 'action'." });
