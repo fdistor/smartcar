@@ -79,12 +79,10 @@ module.exports = {
       res.status(200);
 
       const { batteryLevel } = parsed.data;
+      const percent =
+        batteryLevel.type === 'Number' ? Number(batteryLevel.value) : null;
 
-      if (batteryLevel.type === 'Number') {
-        const percent = Number(batteryLevel.value);
-
-        res.send({ percent });
-      } else res.send({ percent: null });
+      res.send({ percent });
     } else {
       respondOn404(res, parsed);
     }
