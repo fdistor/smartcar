@@ -4,7 +4,7 @@ const gm = new GMApi();
 module.exports = {
   getVehicleInfo: async (req, res) => {
     const { id } = req.params;
-    const result = await gm.getVehicleInfo(id);
+    const result = await gm.getInfo('vehicleInfo', id);
     const parsed = JSON.parse(result);
     const { status } = parsed;
 
