@@ -26,7 +26,8 @@ module.exports = {
         doorCount
       });
     } else {
-      res.status(404).send(parsed);
+      const { reason } = parsed;
+      res.status(404).send({ reason });
     }
   },
 
@@ -46,7 +47,8 @@ module.exports = {
 
       res.status(200).send(result);
     } else {
-      res.status(404).send(parsed);
+      const { reason } = parsed;
+      res.status(404).send({ reason });
     }
   },
 
