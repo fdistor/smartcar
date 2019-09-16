@@ -9,15 +9,7 @@ module.exports = class GMApi {
     return new Promise((resolve, reject) => {
       const path = this.isValidPath(fileName, id);
 
-      if (path) {
-        fs.readFile(path, 'utf8', (err, data) => {
-          if (err) reject(err);
-
-          resolve(data);
-        });
-      } else {
-        resolve(this.badRequest(id));
-      }
+      this.readFileAndCompletePromise(path, id, resolve, reject);
     });
   }
 
@@ -36,16 +28,20 @@ module.exports = class GMApi {
 
       const path = this.isValidPath(target, id);
 
-      if (path) {
-        fs.readFile(path, 'utf8', (err, data) => {
-          if (err) reject(err);
-
-          resolve(data);
-        });
-      } else {
-        resolve(this.badRequest(id));
-      }
+      this.readFileAndCompletePromise(path, id, resolve, reject);
     });
+  }
+
+  readFileAndCompletePromise(path, id, resolve, reject) {
+    if (path) {
+      fs.readFile(path, 'utf8', (err, data) => {
+        if (err) reject(err);
+
+        resolve(data);
+      });
+    } else {
+      resolve(this.badRequest(id));
+    }
   }
 
   isValidPath(fileName, id) {
