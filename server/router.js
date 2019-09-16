@@ -75,7 +75,26 @@ module.exports = {
     }
   },
 
-  getBattery: async (req, res) => {},
+  getBattery: async (req, res) => {
+    const parsed = await getStatusAndInfo(req, 'energyLevel');
+    const { status } = parsed;
+
+    if (status === '200') {
+      res.status(200);
+
+      const { batteryLevel } = parsed.data;
+
+      if (batteryLevel.type === 'Number') {
+        const percent = Number(batteryLevel.value);
+
+        res.send({ percent });
+      } else res.send({ percent: null });
+    } else {
+      const { reason } = parsed;
+
+      res.status(404).send({ reason });
+    }
+  },
 
   startEngine: async (req, res) => {}
 };
