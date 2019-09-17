@@ -7,6 +7,10 @@ const port = process.env.PORT || 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use((err, req, res, next) => {
+  if (err instanceof Error) res.status(502).send({ message: err.message });
+  next(err);
+});
 
 app.get('/vehicles/:id', router.getVehicleInfo);
 app.get('/vehicles/:id/doors', router.getSecurity);

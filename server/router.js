@@ -13,7 +13,7 @@ const respondOn404 = (res, { reason }) => {
 
 const wrapAsync = func => (req, res, next) =>
   func(req, res, next).catch(() =>
-    next(new Error('Error in fetching from the GM API'))
+    next(new Error('Error in fetching from the GM API.'))
   );
 
 module.exports = {
