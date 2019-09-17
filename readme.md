@@ -1,6 +1,6 @@
 # Smartcar Backend Coding Challenge
 
-This is an API that fetches data from the GM API, polishes the data, and returns the user a clean response.
+This is an API that fetches data from the GM API, polishes the data, and returns a cleaner response to the user.
 
 ## API Routing
 
