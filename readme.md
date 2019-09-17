@@ -12,7 +12,9 @@ Run `$ npm install` to install dependencies.
 
 ## Start up
 
-Run `$ npm start` to start the server.
+Run `$ npm start` to start server in production environment.
+
+Run `$ npm run dev` to start server in development environment.
 
 ## Testing
 
@@ -163,6 +165,6 @@ Response:
 - Mocha/Chai/Sinon - For unit testing the API endpoints
 - Istanbul - For test coverage
 - Express - For server set-up
-- Dotenv - For environment variables (i.e. port)
+- Dotenv - For environment variables
 - Body-Parser - For parsing the body of requests
-- Nodemon - For easy server restarts when developing
+- Nodemon - For server restarts when developing
