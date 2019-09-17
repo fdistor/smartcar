@@ -11,7 +11,10 @@ const respondOn404 = (res, { reason }) => {
   res.status(404).send({ reason });
 };
 
-const wrapAsync = func => (req, res, next) => func(req, res, next).catch(next);
+const wrapAsync = func => (req, res, next) =>
+  func(req, res, next).catch(() =>
+    next(new Error('Error in fetching from the GM API'))
+  );
 
 module.exports = {
   getVehicleInfo: wrapAsync(async (req, res) => {
