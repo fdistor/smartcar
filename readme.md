@@ -12,7 +12,7 @@ This is an API that fetches data from the GM API, polishes the data, and returns
 | /vehicles/:id/battery | GET    | Battery Range     |
 | /vehicles/:id/engine  | POST   | Start/Stop Engine |
 
-### Vehicle Info
+## Vehicle Info
 
 - 200 - OK
 
@@ -20,7 +20,7 @@ Request: `GET /vehicles/1234`
 
 Response: `{ vin: '123123412412', color: 'Metallic Silver', doorCount: 4, driveTrain: 'v8' }`
 
-### Security
+## Security
 
 - 200 - OK
 
@@ -28,7 +28,7 @@ Request: `GET /vehicles/1234/doors`
 
 Response: `[ { location: 'frontLeft', locked: false }, { location: 'frontRight', locked: true }, { location: 'backLeft', locked: false }, { location: 'backRight', locked: true } ]`
 
-### Fuel Range
+## Fuel Range
 
 - 200 - OK
 
@@ -36,7 +36,7 @@ Request: `GET /vehicles/1234/fuel`
 
 Response: `{ percent: 84.15 }`
 
-### Battery Range
+## Battery Range
 
 - 200 - OK
 
@@ -44,7 +44,7 @@ Request: `GET /vehicles/1234/battery`
 
 Response: `{ percent: 64.37 }`
 
-### Start/Stop Engine
+## Start/Stop Engine
 
 - 200 - OK
 
@@ -66,7 +66,7 @@ Request: `POST /vehicles/1234/battery { command: 'START' }`
 
 Response: `{ reason: 'Bad request, missing key 'action'.' }`
 
-### Common Errors
+## Common Errors
 
 - 404 - Invalid vehicle id provided
 
