@@ -4,20 +4,19 @@ const expressWinston = require('express-winston');
 const combinedOptions = {
   transports: [
     new transports.Console(),
-    new transports.File({ filename: 'logs/combined.log' })
+    new transports.File({ filename: 'logs/combined.log', maxsize: 5000000 })
   ],
-  format: format.combine(
-    format.colorize(),
-    format.json(),
-    format.prettyPrint()
-  ),
-  colorize: true
+  format: format.combine(format.colorize(), format.json(), format.prettyPrint())
 };
 
 const errorOptions = {
   transports: [
     new transports.Console(),
-    new transports.File({ filename: 'logs/error.log', level: 'error' })
+    new transports.File({
+      filename: 'logs/error.log',
+      level: 'error',
+      maxsize: 5000000
+    })
   ],
   format: format.combine(format.colorize(), format.json(), format.prettyPrint())
 };
