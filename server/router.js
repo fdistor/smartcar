@@ -156,5 +156,9 @@ module.exports = {
     } else {
       res.status(400).send({ reason: "Bad request, missing key 'action'." });
     }
-  })
+  }),
+
+  throwError: (req, res, next) => {
+    return next(new Error('throwing it'));
+  }
 };

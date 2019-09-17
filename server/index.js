@@ -15,6 +15,7 @@ app.get('/vehicles/:id/doors', router.getSecurity);
 app.get('/vehicles/:id/fuel', router.getFuel);
 app.get('/vehicles/:id/battery', router.getBattery);
 app.post('/vehicles/:id/engine', router.postEngine);
+app.get('/error', router.throwError);
 
 app.use(errorLogger);
 
