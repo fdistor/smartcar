@@ -11,15 +11,17 @@ const respondOn404 = (res, { reason }) => {
   res.status(404).send({ reason });
 };
 
-// wrapAsync accepts a function that will return a promise (i.e. an async function)
-const wrapAsync = func => {
-  // return a function that will invoke func with `req`, `res`, `next`
-  return (req, res, next) => {
-    // since func returns a promise, if it fails, it will invoke `next` which will
-    // be passed into the express error handlers
-    return func(req, res, next).catch(next);
-  };
-};
+/**
+ * Returns a function that invokes `req`, `res`, `next` in the parameter `func`.
+ *
+ * Since `func` returns a promise, if it errors, it will be caught and `next` will be invoked.
+ *
+ * This ensures express error handlers are called if the asynchronous code fails, in this case
+ * if the GMApi fails to respond.
+ *
+ * @param {Function} func - function that must return a promise
+ */
+const wrapAsync = func => (req, res, next) => func(req, res, next).catch(next);
 
 module.exports = {
   getVehicleInfo: wrapAsync(async (req, res) => {
