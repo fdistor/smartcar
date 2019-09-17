@@ -75,7 +75,7 @@ module.exports = class GMApi {
         resolve(data);
       });
     } else {
-      // this assumes the id is invalid
+      // always assumes the id is invalid and not the path
       resolve(this.invalidRequest(id));
     }
   }
