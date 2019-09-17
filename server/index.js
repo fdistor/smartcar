@@ -7,16 +7,18 @@ const port = process.env.PORT || 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use((err, req, res, next) => {
-  if (err instanceof Error) res.status(502).send({ message: err.message });
-  next(err);
-});
 
 app.get('/vehicles/:id', router.getVehicleInfo);
 app.get('/vehicles/:id/doors', router.getSecurity);
 app.get('/vehicles/:id/fuel', router.getFuel);
 app.get('/vehicles/:id/battery', router.getBattery);
 app.post('/vehicles/:id/engine', router.postEngine);
+
+app.use((error, req, res, next) => {
+  console.error(error, 'error in server');
+  res.status(502).send({ message: error.message });
+  next(error);
+});
 
 app.listen(port, err => {
   if (err) console.error(err);
