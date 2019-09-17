@@ -2,11 +2,11 @@ const GMApi = require('../mocks/GMApi.js');
 const gm = new GMApi();
 
 /**
- * Parses params of the `req` for vehicle id and mimics querying the GM API.
+ * Gets vehicle id from `req` and mimics querying the GM API.
  *
  * @param {Object} req - request from client
  * @param {String} fileName - leading name of file, mimics endpoint of GM API
- * @returns {Object} - details of vehicle if valid id or invalid request
+ * @returns {Object} - parsed details of vehicle if valid id or invalid request
  */
 const getStatusAndInfo = async (req, fileName) => {
   const { id } = req.params;
@@ -15,9 +15,9 @@ const getStatusAndInfo = async (req, fileName) => {
 };
 
 /**
- * Respond to client with 404 due to invalid vehicle id.
+ * If GM API responds with 404, respond to client with 404 with reason given by GM API.
  *
- * @param {Object} res - response to the client
+ * @param {Object} res - response to client
  * @param {String} reason - reason on 404 response from GM api
  */
 const respondOn404 = (res, { reason }) => {
@@ -27,7 +27,7 @@ const respondOn404 = (res, { reason }) => {
 /**
  * Returns a function that invokes `req`, `res`, `next` in the parameter `func`.
  *
- * Since `func` returns a promise, if it errors, it will be caught and `next` will be invoked.
+ * Since `func` returns a promise, errors will be caught and `next` will be invoked.
  *
  * This ensures Express error handlers are called if the asynchronous code fails, in this case
  * if the GM API fails to respond or errors.
@@ -117,8 +117,24 @@ module.exports = {
     const { id } = req.params;
 
     if (req.body.action) {
+      /**
+       * If an `action` key exists in request, then deconstruct it. Action used to determine
+       * command to GM API or response to client. Missing `action` key cause 400 response
+       * (missing key in request).
+       *
+       * @const {String} - acceptable actions are 'START' or 'STOP'
+       */
       const { action } = req.body;
-      let command;
+
+      /**
+       * GM API only accepts 'START_VEHICLE' or 'STOP_VEHICLE' as commands,
+       * 'START' action becomes 'START_VEHICLE' and 'STOP' action becomes 'STOP_VEHICLE'.
+       *
+       * Invalid actions cause 400 response (badly formatted request).
+       *
+       * @type {String} - action converted to command compatible with GM API.
+       */
+      let command = '';
 
       if (action === 'START') command = 'START_VEHICLE';
       else if (action === 'STOP') command = 'STOP_VEHICLE';
