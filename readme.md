@@ -102,7 +102,7 @@ Response:
 
 Request: 
 ``` js
-POST /vehicles/1234/battery 
+POST /vehicles/1234/engine
 { action: 'START|STOP' }
 ```
 
@@ -117,7 +117,7 @@ Response:
 
 Request: 
 ``` js
-POST /vehicles/1234/battery 
+POST /vehicles/1234/engine
 { action: 'PAUSE' }
 ```
 
@@ -130,7 +130,7 @@ Response:
 
 Request: 
 ``` js
-POST /vehicles/1234/battery 
+POST /vehicles/1234/engine
 { command: 'START' }
 ```
 
