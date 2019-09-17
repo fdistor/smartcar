@@ -11,9 +11,12 @@ const respondOn404 = (res, { reason }) => {
   res.status(404).send({ reason });
 };
 
+const wrapAsync = func => (req, res, next) => func(req, res, next).catch(next);
+
 module.exports = {
-  getVehicleInfo: async (req, res) => {
+  getVehicleInfo: wrapAsync(async (req, res) => {
     const parsed = await getStatusAndInfo(req, 'vehicleInfo');
+
     const { status } = parsed;
 
     if (status === '200') {
@@ -32,9 +35,9 @@ module.exports = {
     } else {
       respondOn404(res, parsed);
     }
-  },
+  }),
 
-  getSecurity: async (req, res) => {
+  getSecurity: wrapAsync(async (req, res) => {
     const parsed = await getStatusAndInfo(req, 'security');
     const { status } = parsed;
 
@@ -52,9 +55,9 @@ module.exports = {
     } else {
       respondOn404(res, parsed);
     }
-  },
+  }),
 
-  getFuel: async (req, res) => {
+  getFuel: wrapAsync(async (req, res) => {
     const parsed = await getStatusAndInfo(req, 'energyLevel');
     const { status } = parsed;
 
@@ -69,9 +72,9 @@ module.exports = {
     } else {
       respondOn404(res, parsed);
     }
-  },
+  }),
 
-  getBattery: async (req, res) => {
+  getBattery: wrapAsync(async (req, res) => {
     const parsed = await getStatusAndInfo(req, 'energyLevel');
     const { status } = parsed;
 
@@ -86,9 +89,9 @@ module.exports = {
     } else {
       respondOn404(res, parsed);
     }
-  },
+  }),
 
-  postEngine: async (req, res) => {
+  postEngine: wrapAsync(async (req, res) => {
     const { id } = req.params;
 
     if (req.body.action) {
@@ -115,5 +118,5 @@ module.exports = {
     } else {
       res.status(400).send({ reason: "Bad request, missing key 'action'." });
     }
-  }
+  })
 };
