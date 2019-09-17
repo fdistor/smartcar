@@ -2,17 +2,19 @@ const fs = require('fs');
 const root = require('../root.js');
 
 module.exports = class GMApi {
+  /**
+   * @property {Boolean} - determines if `this.postEngine` reads the success or fail file
+   */
   constructor() {
-    // isEngineOn is used to determine whether postEngine will return a success or fail
-    // on starting or stopping the engine
     this.isEngineOn = true;
   }
 
   /**
-   * Reads the contents of the file and returns contents as a promise.
+   * Check if valid vehicle id and read contents of file.
    *
    * @param {String} fileName - leading name of file
    * @param {Number} id - vehicle id
+   * @returns {Object} - contents of file or invalid request
    */
   getInfo(fileName, id) {
     return new Promise((resolve, reject) => {
@@ -23,14 +25,15 @@ module.exports = class GMApi {
   }
 
   /**
-   * Returns success file if valid action and client requests to start engine when isEngineOn false or if client
+   * Read success file if valid action and client requests to start engine when isEngineOn false or if client
    * requests to stop engine when isEngineOn true.
    *
-   * Otherwise, it will return the fail file (i.e. engine is on and client requests to start engine).
+   * Otherwise, will read the fail file (i.e. engine is on and client requests to start engine).
    *
    * @param {String} fileName - leading name of file
    * @param {Number} id - vehicle id
    * @param {String} action - action sent to the vehicle
+   * @returns {Object} - contents of file or invalid request
    */
   postEngine(fileName, id, action) {
     return new Promise((resolve, reject) => {
