@@ -32,67 +32,131 @@ Run `$ npm test` to test the code.
 
 - 200 - OK
 
-Request: `GET /vehicles/1234`
+Request:
+``` js
+GET /vehicles/1234
+```
 
-Response: `{ vin: '123123412412', color: 'Metallic Silver', doorCount: 4, driveTrain: 'v8' }`
+Response: 
+``` js
+{ 
+  vin: '123123412412', 
+  color: 'Metallic Silver', 
+  doorCount: 4, 
+  driveTrain: 'v8' 
+}
+```
 
 ## Security
 
 - 200 - OK
 
-Request: `GET /vehicles/1234/doors`
+Request: 
+``` js
+GET /vehicles/1234/doors
+```
 
-Response: `[ { location: 'frontLeft', locked: false }, { location: 'frontRight', locked: true }, { location: 'backLeft', locked: false }, { location: 'backRight', locked: true } ]`
+Response: 
+```
+[
+  { location: 'frontLeft', locked: false }, 
+  { location: 'frontRight', locked: true }, 
+  { location: 'backLeft', locked: false }, 
+  { location: 'backRight', locked: true }
+]
+```
 
 ## Fuel Range
 
 - 200 - OK
 
-Request: `GET /vehicles/1234/fuel`
+Request: 
+``` js
+GET /vehicles/1234/fuel
+```
 
-Response: `{ percent: 84.15 }`
+Response: 
+``` js
+{ percent: 84.15 }
+```
 
 ## Battery Range
 
 - 200 - OK
 
-Request: `GET /vehicles/1234/battery`
+Request: 
+``` js
+GET /vehicles/1234/battery
+```
 
-Response: `{ percent: 64.37 }`
+Response: 
+``` js
+{ percent: 64.37 }
+```
 
 ## Start/Stop Engine
 
 - 200 - OK
 
-Request: `POST /vehicles/1234/battery { action: 'START|STOP' }`
+Request: 
+``` js
+POST /vehicles/1234/battery 
+{ action: 'START|STOP' }
+```
 
-Response: `{ status: 'success|error' }`
+Response: 
+``` js
+{ status: 'success|error' }
+```
 
 - 400 - Bad request, invalid action or missing key 'action'
 
 **Invalid Action**
 
-Request: `POST /vehicles/1234/battery { action: 'PAUSE' }`
+Request: 
+``` js
+POST /vehicles/1234/battery 
+{ action: 'PAUSE' }
+```
 
-Response: `{ reason: 'Bad request, invalid action.' }`
+Response: 
+``` js
+{ reason: 'Bad request, invalid action.' }
+```
 
 **Missing Key**
 
-Request: `POST /vehicles/1234/battery { command: 'START' }`
+Request: 
+``` js
+POST /vehicles/1234/battery 
+{ command: 'START' }
+```
 
-Response: `{ reason: 'Bad request, missing key 'action'.' }`
+Response: 
+``` js
+{ reason: 'Bad request, missing key 'action'.' }
+```
 
 ## Common Errors
 
 - 404 - Invalid vehicle id provided
 
-Request: `GET /vehicles/thisIsInvalidId`
+Request: 
+``` js
+GET /vehicles/thisIsInvalidId
+```
 
-Response: `{ reason: 'Vehicle id: thisIsInvalidId not found.' }`
+Response: 
+``` js
+{ reason: 'Vehicle id: thisIsInvalidId not found.' }
+```
 
 - 502 - Failed to fetch from GM API
 
-Response: `{ reason: 'Failed to fetch from GM API.' }`
+Response: 
+``` js
+{ reason: 'Failed to fetch from GM API.' }
+```
 
 ## Built With
 
