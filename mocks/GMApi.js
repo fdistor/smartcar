@@ -12,9 +12,9 @@ module.exports = class GMApi {
   /**
    * Check if valid vehicle id and read contents of file.
    *
-   * @param {String} fileName - leading name of file
+   * @param {String} fileName - leading name of file (i.e. 'security' of security1234.json)
    * @param {Number} id - vehicle id
-   * @returns {Object} - contents of file or invalid request
+   * @returns {Promise} - resolves to contents of file or invalid request
    */
   getInfo(fileName, id) {
     return new Promise((resolve, reject) => {
@@ -30,10 +30,10 @@ module.exports = class GMApi {
    *
    * Otherwise, will read the fail file (i.e. engine is on and client requests to start engine).
    *
-   * @param {String} fileName - leading name of file
+   * @param {String} fileName - leading name of file (i.e. 'security' of security1234.json)
    * @param {Number} id - vehicle id
    * @param {String} action - action sent to the vehicle
-   * @returns {Object} - contents of file or invalid request
+   * @returns {Promise} - resolves to contents of file or invalid request
    */
   postEngine(fileName, id, action) {
     return new Promise((resolve, reject) => {
@@ -63,9 +63,9 @@ module.exports = class GMApi {
    * Otherwise, it will resolve with an invalid request.
    *
    * @param {String} path - full path to file
-   * @param {Number} id -
-   * @param {Function} resolve
-   * @param {Function} reject
+   * @param {Number} id - vehicle id
+   * @param {Function} resolve - resolve of promise
+   * @param {Function} reject - reject of promise
    */
   readFileAndCompletePromise(path, id, resolve, reject) {
     if (path) {
@@ -83,7 +83,7 @@ module.exports = class GMApi {
   /**
    * Check if vehicle id is valid.
    *
-   * @param {String} fileName - leading name of file
+   * @param {String} fileName - leading name of file (i.e. 'security' of security1234.json)
    * @param {Number} id - vehicle id
    * @returns {String|Boolean} - return full path name if file exists, else return false
    */
