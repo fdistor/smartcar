@@ -93,3 +93,12 @@ Response: `{ reason: 'Vehicle id: thisIsInvalidId not found.' }`
 - 502 - Failed to fetch from GM API
 
 Response: `{ reason: 'Failed to fetch from GM API.' }`
+
+## Built With
+
+- Mocha/Chai/Sinon - For unit testing the API endpoints
+- Istanbul - For test coverage
+- Express - For server set-up
+- Dotenv - For environment variables (i.e. port)
+- Body-Parser - For parsing the body of requests
+- Nodemon - For easy server restarts when developing
