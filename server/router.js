@@ -1,12 +1,25 @@
 const GMApi = require('../mocks/GMApi.js');
 const gm = new GMApi();
 
+/**
+ * Parses params of the `req` for vehicle id and mimics querying the GM API.
+ *
+ * @param {Object} req - request from client
+ * @param {String} fileName - leading name of file, mimics endpoint of GM API
+ * @returns {Object} - details of vehicle if valid id or invalid request
+ */
 const getStatusAndInfo = async (req, fileName) => {
   const { id } = req.params;
   const result = await gm.getInfo(fileName, id);
   return JSON.parse(result);
 };
 
+/**
+ * Respond to client with 404 due to invalid vehicle id.
+ *
+ * @param {Object} res - response to the client
+ * @param {String} reason - reason on 404 response from GM api
+ */
 const respondOn404 = (res, { reason }) => {
   res.status(404).send({ reason });
 };
@@ -16,8 +29,8 @@ const respondOn404 = (res, { reason }) => {
  *
  * Since `func` returns a promise, if it errors, it will be caught and `next` will be invoked.
  *
- * This ensures express error handlers are called if the asynchronous code fails, in this case
- * if the GMApi fails to respond.
+ * This ensures Express error handlers are called if the asynchronous code fails, in this case
+ * if the GM API fails to respond or errors.
  *
  * @param {Function} func - function that must return a promise
  */
