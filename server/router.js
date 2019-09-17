@@ -11,7 +11,15 @@ const respondOn404 = (res, { reason }) => {
   res.status(404).send({ reason });
 };
 
-const wrapAsync = func => (req, res, next) => func(req, res, next).catch(next);
+// wrapAsync accepts a function that will return a promise (i.e. an async function)
+const wrapAsync = func => {
+  // return a function that will invoke func with `req`, `res`, `next`
+  return (req, res, next) => {
+    // since func returns a promise, if it fails, it will invoke `next` which will
+    // be passed into the express error handlers
+    return func(req, res, next).catch(next);
+  };
+};
 
 module.exports = {
   getVehicleInfo: wrapAsync(async (req, res) => {
