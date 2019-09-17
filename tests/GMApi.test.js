@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const GMApi = require('../mocks/GMApi.js');
+const GMApi = require('../GM/GMApi.js');
 const root = require('../root.js');
 
 describe('GMApi class', () => {
@@ -36,7 +36,7 @@ describe('GMApi functionality', () => {
   it('Should return complete file path if valid file', () => {
     const path = gm.isValidPath('vehicleInfo', 1234);
 
-    expect(path).to.equal(`${root}/mocks/data/vehicleInfo1234.json`);
+    expect(path).to.equal(`${root}/GM/data/vehicleInfo1234.json`);
   });
 
   it('Should return false if invalid file', () => {

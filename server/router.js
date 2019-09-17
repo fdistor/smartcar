@@ -1,4 +1,4 @@
-const GMApi = require('../mocks/GMApi.js');
+const GMApi = require('../GM/GMApi.js');
 const gm = new GMApi();
 
 /**

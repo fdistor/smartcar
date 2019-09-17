@@ -89,7 +89,7 @@ module.exports = class GMApi {
    */
   isValidPath(fileName, id) {
     // use the project root path which makes this method useable in the tests folder
-    const path = root + `/mocks/data/${fileName}${id}.json`;
+    const path = root + `/GM/data/${fileName}${id}.json`;
 
     // check if provided path exists
     return fs.existsSync(path) ? path : false;
