@@ -15,8 +15,8 @@ app.get('/vehicles/:id/battery', router.getBattery);
 app.post('/vehicles/:id/engine', router.postEngine);
 
 app.use((error, req, res, next) => {
-  console.error(error, 'error in server');
-  res.status(502).send({ message: error.message });
+  console.error(error, 'Promise failed (assuming from GM API).');
+  res.status(502).send({ message: 'Failed to fetch from GM API.' });
   next(error);
 });
 
