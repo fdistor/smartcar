@@ -34,7 +34,8 @@ const respondOn404 = (res, { reason }) => {
  *
  * @param {Function} func - function that must return a promise
  */
-const wrapAsync = func => (req, res, next) => func(req, res, next).catch(next);
+const wrapAsync = func => (req, res, next) =>
+  func(req, res, next).catch(() => next(new Error(1)));
 
 module.exports = {
   getVehicleInfo: wrapAsync(async (req, res) => {
@@ -159,6 +160,6 @@ module.exports = {
   }),
 
   throwError: (req, res, next) => {
-    return next(new Error('throwing it'));
+    return next(new Error(0));
   }
 };
